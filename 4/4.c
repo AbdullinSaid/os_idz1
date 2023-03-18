@@ -108,7 +108,7 @@ int main(int argc, char *argv[]) {
                 printf("processing: Can\'t close writing side of pipe 2to3\n");
                 exit(-1);
             }
-        } else {
+        } else { /* Output process */
             if (close(fd2to3[1]) < 0) {
                 printf("output: Can\'t close writing side of pipe 2to3\n");
                 exit(-1);
