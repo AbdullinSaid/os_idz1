@@ -1,1 +1,0 @@
-tried reasing substr with that length
