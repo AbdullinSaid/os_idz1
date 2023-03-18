@@ -1,0 +1,1 @@
+no decreasing substr with that length
