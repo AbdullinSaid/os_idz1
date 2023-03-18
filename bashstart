@@ -1,6 +1,0 @@
-#!/bin/bash
-mknod ~/hse/idz1/1to2.fifo p
-mknod ~/hse/idz1/2to1.fifo p
-gcc 8first.c -o first
-gcc 8second.c -o second 
-./first $1 $2 & ./second $3
