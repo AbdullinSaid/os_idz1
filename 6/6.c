@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
         exit(-1);
     }
     if (pipe(fd2to1) < 0) {
-        printf("Can\'t open pipe 2to3\n");
+        printf("Can\'t open pipe 2to1\n");
         exit(-1);
     }
  
@@ -26,9 +26,9 @@ int main(int argc, char *argv[]) {
     if (result < 0) {
         printf("Can\'t fork processing\n");
         exit(-1);
-    } else if (result > 0) { /* Input process */
+    } else if (result > 0) { /* Input&Output process */
         if (close(fd1to2[0]) < 0) {
-            printf("input: Can\'t close reading side of pipe 1to2\n");
+            printf("Input&Output: Can\'t close reading side of pipe 1to2\n");
             exit(-1);
         }
  
@@ -41,28 +41,28 @@ int main(int argc, char *argv[]) {
         ssize_t s_size = read(file, s, MAX_SIZE);
         ssize_t size = write(fd1to2[1], s, s_size);
         if (size != s_size) {
-            printf("input: Can\'t write all string to pipe 1to2\n");
+            printf("Input&Output: Can\'t write all string to pipe 1to2\n");
             exit(-1);
         }
         if (close(fd1to2[1]) < 0) {
-            printf("input: Can\'t close writing side of pipe 1to2\n");
+            printf("Input&Output: Can\'t close writing side of pipe 1to2\n");
             exit(-1);
         }
 
 
         if (close(fd2to1[1]) < 0) {
-            printf("output: Can\'t close writing side of pipe 2to3\n");
+            printf("Input&Output: Can\'t close writing side of pipe 2to1\n");
             exit(-1);
         }
         char s2[MAX_SIZE];
         ssize_t size2 = read(fd2to1[0], s2, MAX_SIZE);
         if ((file = open(argv[2], O_WRONLY)) < 0){
-            printf("output: Can\'t open output file\n");
+            printf("Input&Output: Can\'t open output file\n");
             exit(-1);
         }
         write(file, s2, size2);
         if (close(fd2to1[0]) < 0) {
-            printf("output: Can\'t close reading side of pipe 2to3\n");
+            printf("Input&Output: Can\'t close reading side of pipe 2to1\n");
             exit(-1);
         }
     } else {  /* data processing process */
@@ -99,25 +99,25 @@ int main(int argc, char *argv[]) {
              exit(-1);
          }
          if (close(fd2to1[0]) < 0) {
-             printf("processing: Can\'t close reading side of pipe 2to3\n");
+             printf("processing: Can\'t close reading side of pipe 2to1\n");
              exit(-1);
          }
          if (is_found) {
              size = write(fd2to1[1], answer, n);
              if (size != n) {
-                 printf("processing: Can\'t write all string to pipe 2to3\n");
+                 printf("processing: Can\'t write all string to pipe 2to1\n");
                  exit(-1);
              }
          } else {
               char not_found_message[] = "no decreasing substr with that length";
               size = write(fd2to1[1], not_found_message, sizeof(not_found_message) - 1);
               if (size != sizeof(not_found_message) - 1) {
-                  printf("processing: Can\'t write all string to pipe 2to3\n");
+                  printf("processing: Can\'t write all string to pipe 2to1\n");
                   exit(-1);
               }
         }
         if (close(fd2to1[1]) < 0) {
-            printf("processing: Can\'t close writing side of pipe 2to3\n");
+            printf("processing: Can\'t close writing side of pipe 2to1\n");
             exit(-1);
         }
     }
