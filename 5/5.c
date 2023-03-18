@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
                     exit(-1);
                 }
             }
-        } else {
+        } else { /* Output process */
             if ((fd2to3 = open(name2to3, O_RDONLY)) < 0) {
                 printf("Can't open FIFO for reading");
             }
