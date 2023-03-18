@@ -48,15 +48,14 @@ int main(int argc, char *argv[]) {
     if (is_found) {
         size = write(fd2to1, answer, n);
         if (size != n) {
-            printf("processing: Can\'t write all string to pipe 2to3\n");
+            printf("processing: Can\'t write all string to pipe 2to1\n");
             exit(-1);
         }
     } else {
-        printf("asdas");
         char not_found_message[] = "no decreasing substr with that length";
         size = write(fd2to1, not_found_message, sizeof(not_found_message) - 1);
         if (size != sizeof(not_found_message) - 1) {
-            printf("processing: Can\'t write all string to pipe 2to3\n");
+            printf("processing: Can\'t write all string to pipe 2to1\n");
             exit(-1);
         }
     }
