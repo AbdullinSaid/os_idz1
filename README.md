@@ -22,21 +22,31 @@
 Схема связей для 4
 input ->(неименованный канал) processing ->(неименованный канал) output
 все процессы - родственные.
+input.txt -> input
+output -> output.txt
 
 Схема связей для 5
 input ->(именованный канал) processing ->(именованный канал) output
 все процессы - родственные.
+input.txt -> input
+output -> output.txt
 
 Схема связей для 6
 input&output <->(2 неименованных канала) processing
 все процессы - родственные.
+input.txt -> input&output
+input&output -> output.txt
 
 Схема связей для 7
 input&output <->(2 именованных канала) processing
 все процессы - родственные.
+input.txt -> input&output
+input&output -> output.txt
 
 Схема связей для 8
 input&output <->(2 именованных канала) processing
 все процессы - неродственные.
+input.txt -> input&output
+input&output -> output.txt
 
 Все результаты на тестах верны и одинаковы.
